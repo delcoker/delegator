@@ -213,7 +213,7 @@ function register() {
 //   prompt("d", url_confirm);
    var con = syncAjax(url_confirm);
 
-   window.open("indexer.html#login_page", "_self");
+   window.open("index.html#login_page", "_self");
 }
 
 //function pleaseEnter(text)
@@ -241,7 +241,7 @@ function login() {
 
       get_meetings();
 
-      window.open("indexer.html#meetings_page", "_self");
+      window.open("index.html#meetings_page", "_self");
    }
    else {
       alert("username or password wrong\nOr lease register");
@@ -350,7 +350,7 @@ function getTicket(meeting_id) {
    var ticket = r2.ticket;
    qrgenerate(ticket);
 
-   window.open("indexer.html#ticket", '_self');
+   window.open("index.html#ticket", '_self');
 }
 
 function qrgenerate(rand) {
