@@ -114,7 +114,7 @@ function getFormattedDate(date) {
 }
 
 function logout() {
-   window.open("logout.php", "_self");
+   window.open("index.html", "_self");
 }
 
 function register() {
