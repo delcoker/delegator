@@ -18,12 +18,16 @@ var res_seats = 0;
 var pass_on_bus = 0;
 var num_of_seats = 0;
 
+var phongap = "http://50.63.128.135/~csashesi/class2015/kingston-coker/mobile_web/delegator/";
+//var phongap = "";
+
 $(document).ready(function () {
 //   var amount_left = $('#amount_left').text();
 //   alert(amount_left);
 //   login();
 });
 
+var meeting_id;
 
 function syncAjax(u) {
    var obj = $.ajax({url: u, async: false});
@@ -71,7 +75,7 @@ function publish_ass() {
       return;
    }
 
-   var u = "action_1.php?cmd=3&school_id=" + school_id + "&class_id=" + class_id + "&subject_id=" + subject_id + "&date=" + date + "&teacher_id=" + id + "&ass=" + ass;
+   var u = phongap+"action_1.php?cmd=3&school_id=" + school_id + "&class_id=" + class_id + "&subject_id=" + subject_id + "&date=" + date + "&teacher_id=" + id + "&ass=" + ass;
 
 //   prompt("URL", u);
 
@@ -89,7 +93,7 @@ function publish_ass() {
 
    // send message
 
-   var u = "action_1.php?cmd=4" + "&date=" + date + "&teacher_id=" + id;
+   var u = phongap+"action_1.php?cmd=4" + "&date=" + date + "&teacher_id=" + id;
    r = syncAjax(u);
 
    if (r.result === 1) {
@@ -162,7 +166,7 @@ function register() {
 
 
 
-   var url = "action_1.php?cmd=1&firstname=" + fname + "&lastname=" + lname + "&email=" + email + "&password=" + pass + "&org=" + org + "&phone_num=" + phone_num + "&conf=" + conf_num;
+   var url = phongap+"action_1.php?cmd=1&firstname=" + fname + "&lastname=" + lname + "&email=" + email + "&password=" + pass + "&org=" + org + "&phone_num=" + phone_num + "&conf=" + conf_num;
 
 //   prompt("url", url);
 
@@ -174,10 +178,11 @@ function register() {
 
    id = r.id;
 
-   var url_send_msg = "action_1.php?cmd=4&conf=" + conf_num + "&phone_num=" + phone_num;
+   var url_send_msg = phongap+"action_1.php?cmd=4&conf=" + conf_num + "&phone_num=" + phone_num;
 //   prompt("url", url_send_msg);
 //   debugger;
    try {
+      
       var sms = syncAjax(url_send_msg);
    }
    catch (err) {
@@ -204,11 +209,11 @@ function register() {
    }
 
    // confirm person
-   var url_confirm = "action_1.php?cmd=3&id=" + id;
+   var url_confirm = phongap+"action_1.php?cmd=3&id=" + id;
 //   prompt("d", url_confirm);
    var con = syncAjax(url_confirm);
 
-   window.open("index_web.php#login_page", "_self");
+   window.open("indexer.html#login_page", "_self");
 }
 
 //function pleaseEnter(text)
@@ -219,7 +224,7 @@ function login() {
    var user = document.getElementById("username").value;
    var pass = document.getElementById("password").value;
 
-   var u = "action_1.php?cmd=2&user=" + user + "&pass=" + pass;
+   var u = phongap+"action_1.php?cmd=2&user=" + user + "&pass=" + pass;
 //   prompt("URL", u);
    r = syncAjax(u);
 
@@ -236,7 +241,7 @@ function login() {
 
       get_meetings();
 
-      window.open("index_web.php#meetings_page", "_self");
+      window.open("indexer.html#meetings_page", "_self");
    }
    else {
       alert("username or password wrong\nOr lease register");
@@ -245,9 +250,21 @@ function login() {
 }
 
 
+function check_in(){
+   var url = phongap+"action_1.php?cmd=9&user_id=" + id + "&meeting_id=" + meeting_id;
+//      prompt("u", url1);
+//      debugger;
+   var r = syncAjax(url);
+   
+   alert(r.message);
+   
+}
+
+
+
 function get_meetings() {
 
-   var url = "action_1.php?cmd=8";
+   var url = phongap+"action_1.php?cmd=8";
 
 //   prompt("url", url);
    var assigns = syncAjax(url);
@@ -271,7 +288,7 @@ function get_meetings() {
 function popUp(meeting_id, text) {
 
    // if already registered for meeting
-   var url5 = "action_1.php?cmd=6&user_id=" + id + "&meeting_id=" + meeting_id;
+   var url5 = phongap+"action_1.php?cmd=6&user_id=" + id + "&meeting_id=" + meeting_id;
 //      prompt("u", url1);
 //      debugger;
    var r5 = syncAjax(url5);
@@ -279,7 +296,7 @@ function popUp(meeting_id, text) {
 //      already registered
    if (r5.result === 1) {
       //get details
-      var url1 = "action_1.php?cmd=7&user_id=" + id + "&meeting_id=" + meeting_id;
+      var url1 = phongap+"action_1.php?cmd=7&user_id=" + id + "&meeting_id=" + meeting_id;
       var r1 = syncAjax(url1);
 
       // get ticket
@@ -296,7 +313,7 @@ function popUp(meeting_id, text) {
 
    if (reg === 'y') {
 
-      var url1 = "action_1.php?cmd=6&user_id=" + id + "&meeting_id=" + meeting_id;
+      var url1 = phongap+"action_1.php?cmd=6&user_id=" + id + "&meeting_id=" + meeting_id;
 //      prompt("u", url1);
 //      debugger;
       var r1 = syncAjax(url1);
@@ -313,7 +330,7 @@ function popUp(meeting_id, text) {
 
 // register
       var code = Math.floor(Math.random() * 900000) + 100000;
-      var url = "action_1.php?cmd=5&user_id=" + id + "&meeting_id=" + meeting_id + "&code=" + code;
+      var url = phongap+"action_1.php?cmd=5&user_id=" + id + "&meeting_id=" + meeting_id + "&code=" + code;
 
 //      prompt("url", url);
       var r = syncAjax(url);
@@ -325,14 +342,15 @@ function popUp(meeting_id, text) {
 }
 
 function getTicket(meeting_id) {
-   var url2 = "action_1.php?cmd=7&user_id=" + id + "&meeting_id=" + meeting_id;
+   this.meeting_id = meeting_id;
+   var url2 = phongap+"action_1.php?cmd=7&user_id=" + id + "&meeting_id=" + meeting_id;
 
    var r2 = syncAjax(url2);
 
    var ticket = r2.ticket;
    qrgenerate(ticket);
 
-   window.open("index_web.php#ticket", '_self');
+   window.open("indexer.html#ticket", '_self');
 }
 
 function qrgenerate(rand) {
@@ -355,7 +373,7 @@ function payment() {
 //      alert(ticket);
 
       var url = "login_mobile_action_1.php?cmd=3&user_id=" + user_id + "&new_amount=" + new_amount + "&amount_before=" + amount_before + "&fare=" + $("#fare").val() + "&ticket_num=" + ticket + "&location=" + global_drop_off;
-      prompt("url", url);
+//      prompt("url", url);
       r = syncAjax(url);
 //      prompt("url", r.result);
       if (r.result === 1) { // signifies update

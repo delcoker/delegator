@@ -6,10 +6,10 @@
  * description: A root class for all manage classes. This class communicates with DB
  */
 define("DB_HOST", 'localhost');
-define("DB_NAME", 'csashesi_kingston-coker');
+define("DB_NAME", 'mw_delegate');
 define("DB_PORT", 3306);
-define("DB_USER", "csashesi_kc15");
-define("DB_PWORD", "db!a4df4d");
+define("DB_USER", "root");
+define("DB_PWORD", "");
 
 
 //define("DB_USER", "csashesi_kc15");

@@ -159,5 +159,5 @@
       <!----------------------------------------------------------->
 
    </body>
-   <script src="js_web/methods.js"></script>
+   <script src="js_web/methods2.js"></script>
 </html>
